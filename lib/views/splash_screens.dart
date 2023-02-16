@@ -1,8 +1,10 @@
 // ignore_for_file: avoid_unnecessary_containers
 
-import 'package:chat_app/data/strings.dart';
-import 'package:chat_app/views/login_view.dart';
+import 'package:chat_app/services/strings.dart';
+import 'package:chat_app/views/sigin_up_screen.dart';
+import 'package:chat_app/views/sigin_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/custombutton.dart';
 class SplashScreens extends StatefulWidget {
@@ -63,7 +65,8 @@ class _SplashScreensState extends State<SplashScreens> {
                         width: MediaQuery.of(context).size.width / 2.4,
                         label: "Sigin Up",
                         onPressed: (){
-
+                            // ignore: prefer_const_constructors
+                            Get.to(SiginUpScreen());
                         },
                         backgroundColor: Colors.red,
                         labelColor: Colors.white,

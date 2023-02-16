@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:chat_app/data/strings.dart';
+import 'package:chat_app/controller/sigin_controller.dart';
+import 'package:chat_app/models/sigin_model.dart';
+import 'package:chat_app/services/strings.dart';
+import 'package:chat_app/services/text_edtor_value.dart';
 import 'package:chat_app/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/customTextField.dart';
 class LoginView extends StatefulWidget {
@@ -14,9 +18,21 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool  obscureText = false;
+  final SiginController _siginController = Get.put(SiginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          child: Icon(Icons.arrow_back_ios,color: Colors.white,),
+          onTap: (){
+            // Navigator.pop(context);
+            Get.back();
+          },
+        ),
+        elevation: 0,
+        backgroundColor:Colors.grey[850],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -35,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // ignore: prefer_const_literals_to_create_immutables
                   children:  [
-                      Text("Login",
+                      Text("Sigin",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -46,8 +62,8 @@ class _LoginViewState extends State<LoginView> {
                       CoustomTextFormField(
                         keyboardType: TextInputType.emailAddress,
                         label: "Enter email",
-                        prefixIcon: Icon(Icons.person, color: Colors.grey,),
-                        controller: TextEditingController(),
+                        prefixIcon: Icon(Icons.email, color: Colors.grey,),
+                        controller: TextEditControllers.emailController,
                       ),
                       SizedBox(height: 15,),
                       CoustomTextFormField(
@@ -62,14 +78,20 @@ class _LoginViewState extends State<LoginView> {
                           },
                           child: Icon( obscureText ? Icons.visibility_off : Icons.visibility,color: Colors.grey,),
                         ),
-                        controller: TextEditingController(),
+                        controller: TextEditControllers.passwordController,
                       ),
                       SizedBox(height: 16,),
                       CustomButton(
                         width: MediaQuery.of(context).size.width,
-                        label: "Login", 
+                        label: "Sigin", 
                         onPressed:(){
-
+                          //sigin model
+                          var siginModel = SiginModel(
+                            username: TextEditControllers.emailController.text,
+                            password: TextEditControllers.passwordController.text
+                          );
+                          //sigin data pass
+                          _siginController.siginPost(siginModel);
                         },
                       ),
                     SizedBox(height: 32,),
