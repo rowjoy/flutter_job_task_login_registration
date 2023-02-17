@@ -3,4 +3,8 @@ class Keys {
   static String siginUrl = "consumer/login";
   static String siginUpUrl = "consumer/register";
   static String userProfileUrl = "consumer/";
+
+
+  static String sessionId = "session_id";
+  static String consumerUuid = "consumer_uuid";
 }

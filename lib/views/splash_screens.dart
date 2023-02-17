@@ -1,33 +1,17 @@
 // ignore_for_file: avoid_unnecessary_containers
 
+import 'package:chat_app/controller/splash_screen_controller.dart';
+import 'package:chat_app/services/colors.dart';
 import 'package:chat_app/services/strings.dart';
-import 'package:chat_app/views/sigin_up_screen.dart';
+import 'package:chat_app/views/sigin_up_view.dart';
 import 'package:chat_app/views/sigin_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widgets/custombutton.dart';
-class SplashScreens extends StatefulWidget {
-  const SplashScreens({super.key});
-
-  @override
-  State<SplashScreens> createState() => _SplashScreensState();
-}
-
-class _SplashScreensState extends State<SplashScreens> {
-  bool isTrue = true;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed((const Duration(seconds: 2)),(){
-      setState(() {
-        isTrue = false;
-      });
-      // Future.delayed( const Duration(milliseconds: 100),(){
-      //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginView()));
-      // });
-    });
-  }
+class SplashScreens extends StatelessWidget {
+   SplashScreens({super.key});
+  final SplashScreenController _splashScreenController = Get.put(SplashScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,39 +24,39 @@ class _SplashScreensState extends State<SplashScreens> {
               children: [
                 AspectRatio(
                   aspectRatio: 1,
-                  child: Image.asset("assets/images/login-screen.png"),
+                  child: Image.asset(Strings.siginImagePath),
                 ),
                 Text(Strings.noteInfo,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.whiteColor,
                     fontSize: 15,
                   ),
                 ),
-                isTrue ?  const CircularProgressIndicator(
-                    color: Colors.white,
-                  ): Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomButton(
-                        width: MediaQuery.of(context).size.width / 2.4,
-                        label: "Sigin",
-                        onPressed: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginView()));
-                        },
-                      ),
-                      CustomButton(
-                        width: MediaQuery.of(context).size.width / 2.4,
-                        label: "Sigin Up",
-                        onPressed: (){
-                            // ignore: prefer_const_constructors
-                            Get.to(SiginUpScreen());
-                        },
-                        backgroundColor: Colors.red,
-                        labelColor: Colors.white,
-                      ),
-                    ],
-                  ),
+                Obx(()=>(_splashScreenController.isLogging.value ?  const CircularProgressIndicator(
+                      color: AppColors.whiteColor,
+                    ): Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomButton(
+                          width: MediaQuery.of(context).size.width / 2.4,
+                          label: Strings.sigin,
+                          onPressed: (){
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=> SiginScreen()));
+                          },
+                        ),
+                        CustomButton(
+                          width: MediaQuery.of(context).size.width / 2.4,
+                          label: Strings.siginUp,
+                          onPressed: (){
+                              Get.to(SiginUpScreen());
+                          },
+                          backgroundColor: AppColors.redColor,
+                          labelColor: AppColors.whiteColor,
+                        ),
+                      ],
+                    ))
+                ),
               ],
             ),
           ) ,

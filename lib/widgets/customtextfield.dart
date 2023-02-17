@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:chat_app/services/colors.dart';
 import 'package:flutter/material.dart';
 class CoustomTextFormField extends StatelessWidget {
   final String label;
@@ -8,6 +9,7 @@ class CoustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool  obscureText ;
+  final String? Function(String?)? validator;
   const CoustomTextFormField({
     Key? key,
     required this.label,
@@ -16,6 +18,7 @@ class CoustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.obscureText = false,
+    this.validator,
 
   }) : super(key: key);
 
@@ -26,31 +29,33 @@ class CoustomTextFormField extends StatelessWidget {
       obscureText: obscureText ,
       keyboardType: keyboardType,
       style: TextStyle(
-        color: Colors.black,
+        color: AppColors.backColor,
         fontSize: 18,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.5,
       ),
+      validator: validator,
+      autovalidateMode:AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         // ignore: unnecessary_string_interpolations
         hintText: "$label",
         hintStyle: TextStyle(
-          color: Colors.grey,
+          color: AppColors.greyColor,
         ),
         border: OutlineInputBorder(),
-        fillColor: Colors.white,
+        fillColor: AppColors.whiteColor,
         filled: true,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.red,
+            color: AppColors.redColor,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(5),

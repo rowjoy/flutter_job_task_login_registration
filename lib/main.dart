@@ -1,6 +1,8 @@
 import 'package:chat_app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await GetStorage.init();
+  runApp( MyApp());
 }

@@ -1,3 +1,4 @@
+import 'package:chat_app/services/colors.dart';
 import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String label;
@@ -9,8 +10,8 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onPressed,
-    this.backgroundColor = Colors.white,
-    this.labelColor = Colors.black,
+    this.backgroundColor = AppColors.whiteColor,
+    this.labelColor = AppColors.backColor,
     this.width ,
   }) : super(key: key);
  
