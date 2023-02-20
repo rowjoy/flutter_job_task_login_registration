@@ -7,4 +7,5 @@ class Keys {
 
   static String sessionId = "session_id";
   static String consumerUuid = "consumer_uuid";
+  static String userName = "userName";
 }
