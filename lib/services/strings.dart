@@ -13,4 +13,5 @@ class Strings {
   static String badTitle = "🥶";
   static String badTostsms = "Something is wrong 🥶";
   static String siginImagePath = "assets/images/login-screen.png";
+  static String clickMe = "Click me";
 }

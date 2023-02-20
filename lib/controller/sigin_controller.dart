@@ -1,3 +1,4 @@
+import 'package:chat_app/controller/user_profile_controller.dart';
 import 'package:chat_app/core/utils/log.dart';
 import 'package:chat_app/models/sigin_model.dart';
 import 'package:chat_app/services/keys.dart';
@@ -10,6 +11,7 @@ import 'package:get_storage/get_storage.dart';
 import '../services/strings.dart';
 
 class SiginController extends GetxController{
+  UserProfileController userProfileController =  Get.put(UserProfileController());
   final dio = Dio();
   final box = GetStorage();
   var lodding = false.obs;
@@ -28,8 +30,9 @@ class SiginController extends GetxController{
       if(response.statusCode == 200){
           box.write(Keys.sessionId, response.data["session_id"]);
           box.write(Keys.consumerUuid, response.data["consumer_uuid"]);
+          userProfileController.getUserInfo(quarry: response.data["consumer_uuid"]);
           lodding.value = false;
-          Get.offAll(()=> const DashboardScreen());
+          Get.offAll(()=>  DashboardScreen());
           //Get.to(()=> const DashboardScreen());
       }
      } on DioError catch(e){
